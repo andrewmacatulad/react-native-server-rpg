@@ -139,19 +139,19 @@ module.exports = app => {
     // // }
 
     // // console.log(c);
-    var sum = 0;
-    var number = 11;
+    // var sum = 0;
+    // var number = 11;
 
-    while (number <= 31) {
-      let i = 1;
-      i = Math.floor((number / 10) % 10) + i;
+    // while (number <= 31) {
+    //   let i = 1;
+    //   i = Math.floor((number / 10) % 10) + i;
 
-      console.log("Number ", number, " I ", i);
-      sum += i;
-      number++; // -- updater
-    }
+    //   console.log("Number ", number, " I ", i);
+    //   sum += i;
+    //   number++; // -- updater
+    // }
 
-    console.log("Sum = " + sum);
+    // console.log("Sum = " + sum);
 
     res.send("tesingan lang");
   });
