@@ -11,11 +11,13 @@ const User = require("./models/userModel");
 const Attribute = require("./models/attributeModel");
 const Profile = require("./models/profileModel");
 
+const port = process.env.PORT || 5000;
+
 sequelize
   .sync()
   .then(result => {
     // console.log(result);
-    server.listen(5000);
+    server.listen(port);
   })
   .catch(err => {
     console.log(err);
