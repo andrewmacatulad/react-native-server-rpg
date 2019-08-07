@@ -95,134 +95,134 @@ passport.use(
   )
 );
 
-passport.use(
-  new FacebookStrategy(
-    {
-      clientID: keys.facebookClientID,
-      clientSecret: keys.facebookClientSecret,
-      callbackURL: "/auth/facebook/callback",
-      profileFields: [
-        "id",
-        "email",
-        "gender",
-        "displayName",
-        "profileUrl",
-        "photos"
-      ],
-      enableProof: true,
-      proxy: true
-    },
-    async (req, accessToken, refreshToken, profile, done) => {
-      // console.log("AccessToken ", accessToken, "profileId", profile.id);
-      if (!req.user) {
-        let existingUser;
-        try {
-          existingUser = await User.findOne({
-            where: { email: profile.emails[0].value }
-          });
-          // console.log(existingUser);
-        } catch (error) {
-          return done(error);
-        }
+// passport.use(
+//   new FacebookStrategy(
+//     {
+//       clientID: keys.facebookClientID,
+//       clientSecret: keys.facebookClientSecret,
+//       callbackURL: "/auth/facebook/callback",
+//       profileFields: [
+//         "id",
+//         "email",
+//         "gender",
+//         "displayName",
+//         "profileUrl",
+//         "photos"
+//       ],
+//       enableProof: true,
+//       proxy: true
+//     },
+//     async (req, accessToken, refreshToken, profile, done) => {
+//       // console.log("AccessToken ", accessToken, "profileId", profile.id);
+//       if (!req.user) {
+//         let existingUser;
+//         try {
+//           existingUser = await User.findOne({
+//             where: { email: profile.emails[0].value }
+//           });
+//           // console.log(existingUser);
+//         } catch (error) {
+//           return done(error);
+//         }
 
-        if (existingUser) {
-          return done(null, existingUser);
-        }
+//         if (existingUser) {
+//           return done(null, existingUser);
+//         }
 
-        console.log(profile);
-        try {
-          const data = {
-            email: profile.emails[0].value,
-            name: profile.displayName,
-            fb_id: profile.id
-          };
+//         console.log(profile);
+//         try {
+//           const data = {
+//             email: profile.emails[0].value,
+//             name: profile.displayName,
+//             fb_id: profile.id
+//           };
 
-          // jwt.sign(data, "sampleSecret", { expiresIn: 36000 }, (err, token) => {
-          //   console.log("Jwt ", jwt, " Token ", token);
-          // });
+//           // jwt.sign(data, "sampleSecret", { expiresIn: 36000 }, (err, token) => {
+//           //   console.log("Jwt ", jwt, " Token ", token);
+//           // });
 
-          User.create(data).then(function(newUser, created) {
-            if (!newUser) {
-              return done(null, false);
-            }
+//           User.create(data).then(function(newUser, created) {
+//             if (!newUser) {
+//               return done(null, false);
+//             }
 
-            if (newUser) {
-              return done(null, newUser);
-            }
-          });
+//             if (newUser) {
+//               return done(null, newUser);
+//             }
+//           });
 
-          // const user = await new User({
-          //   username: profile.emails[0].value,
-          //   name: profile.displayName
-          // }).save();
-          // done(null, user);
-        } catch (error) {
-          console.dir(error.message, { colors: true });
-        }
-      }
-    }
-  )
-);
+//           // const user = await new User({
+//           //   username: profile.emails[0].value,
+//           //   name: profile.displayName
+//           // }).save();
+//           // done(null, user);
+//         } catch (error) {
+//           console.dir(error.message, { colors: true });
+//         }
+//       }
+//     }
+//   )
+// );
 
-passport.use(
-  new TwitterStrategy(
-    {
-      consumerKey: keys.twitterClientID,
-      consumerSecret: keys.twitterClientSecret,
-      callbackURL: "/auth/twitter/callback"
-      // proxy: true
-    },
-    async (req, accessToken, refreshToken, profile, done) => {
-      // console.log("AccessToken ", accessToken, "profileId", profile.id);
-      if (!req.user) {
-        let existingUser;
-        try {
-          existingUser = await User.findOne({
-            where: { email: profile.emails[0].value }
-          });
-          // console.log(existingUser);
-        } catch (error) {
-          return done(error);
-        }
+// passport.use(
+//   new TwitterStrategy(
+//     {
+//       consumerKey: keys.twitterClientID,
+//       consumerSecret: keys.twitterClientSecret,
+//       callbackURL: "/auth/twitter/callback"
+//       // proxy: true
+//     },
+//     async (req, accessToken, refreshToken, profile, done) => {
+//       // console.log("AccessToken ", accessToken, "profileId", profile.id);
+//       if (!req.user) {
+//         let existingUser;
+//         try {
+//           existingUser = await User.findOne({
+//             where: { email: profile.emails[0].value }
+//           });
+//           // console.log(existingUser);
+//         } catch (error) {
+//           return done(error);
+//         }
 
-        if (existingUser) {
-          return done(null, existingUser);
-        }
+//         if (existingUser) {
+//           return done(null, existingUser);
+//         }
 
-        console.log(profile);
-        try {
-          const data = {
-            email: profile.emails[0].value,
-            name: profile.displayName,
-            twitter_id: profile.id
-          };
+//         console.log(profile);
+//         try {
+//           const data = {
+//             email: profile.emails[0].value,
+//             name: profile.displayName,
+//             twitter_id: profile.id
+//           };
 
-          // jwt.sign(data, "sampleSecret", { expiresIn: 36000 }, (err, token) => {
-          //   console.log("Jwt ", jwt, " Token ", token);
-          // });
+//           // jwt.sign(data, "sampleSecret", { expiresIn: 36000 }, (err, token) => {
+//           //   console.log("Jwt ", jwt, " Token ", token);
+//           // });
 
-          User.create(data).then(function(newUser, created) {
-            if (!newUser) {
-              return done(null, false);
-            }
+//           User.create(data).then(function(newUser, created) {
+//             if (!newUser) {
+//               return done(null, false);
+//             }
 
-            if (newUser) {
-              return done(null, newUser);
-            }
-          });
+//             if (newUser) {
+//               return done(null, newUser);
+//             }
+//           });
 
-          // const user = await new User({
-          //   username: profile.emails[0].value,
-          //   name: profile.displayName
-          // }).save();
-          // done(null, user);
-        } catch (error) {
-          console.dir(error.message, { colors: true });
-        }
-      }
-    }
-  )
-);
+//           // const user = await new User({
+//           //   username: profile.emails[0].value,
+//           //   name: profile.displayName
+//           // }).save();
+//           // done(null, user);
+//         } catch (error) {
+//           console.dir(error.message, { colors: true });
+//         }
+//       }
+//     }
+//   )
+// );
 
 passport.use(
   new JwtStrategy(jwtOptions, async function(payload, done) {
