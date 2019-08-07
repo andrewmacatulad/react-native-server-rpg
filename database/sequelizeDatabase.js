@@ -16,9 +16,19 @@ const opts = {
 //   }
 // });
 
-const sequelize = new Sequelize("social-app", "postgres", "asakapa", {
+// const sequelize = new Sequelize("social-app", "postgres", "asakapa", {
+//   dialect: "postgres",
+//   host: "localhost",
+//   define: {
+//     freezeTableName: true,
+//     timestamps: false
+//   }
+// });
+
+const sequelize = new Sequelize(process.env.DATABASE_URL, {
   dialect: "postgres",
-  host: "localhost",
+  protocol: "postgres",
+  host: "https://mighty-bayou-22851.herokuapp.com",
   define: {
     freezeTableName: true,
     timestamps: false
