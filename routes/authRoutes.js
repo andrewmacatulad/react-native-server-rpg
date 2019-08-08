@@ -33,7 +33,7 @@ module.exports = app => {
           res.cookie("test", `Bearer ${token}`, {
             maxAge: 2 * 60 * 60 * 60 * 1000
           });
-          res.redirect("http://localhost:8081/");
+          res.redirect("/");
 
           // res.send({
           //   success: true,
