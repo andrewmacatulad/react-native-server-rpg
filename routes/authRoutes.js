@@ -35,7 +35,7 @@ module.exports = app => {
           });
           // res.redirect("/");
 
-          res.redirect("exp://127.0.0.1:19000");
+          res.redirect("exp://127.0.0.1:19000/protect");
           // res.send({
           //   success: true,
           //   token: "Bearer " + token
