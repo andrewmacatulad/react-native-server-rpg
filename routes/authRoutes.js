@@ -34,7 +34,7 @@ module.exports = app => {
             maxAge: 2 * 60 * 60 * 60 * 1000
           });
           // res.redirect("/");
-          res.redirect("exp://127.0.0.1:19000?user=" + token);
+          res.redirect("exp://127.0.0.1:19000/?user=" + token);
 
           // res.send({
           //   success: true,
