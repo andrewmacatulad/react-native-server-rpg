@@ -34,8 +34,8 @@ module.exports = app => {
             maxAge: 2 * 60 * 60 * 60 * 1000
           });
           // res.redirect("/");
-          res.redirect("exp://10.0.75.1:19000/" + JSON.stringify(payload));
 
+          res.redirect("exp://10.0.75.1:19000/");
           // res.send({
           //   success: true,
           //   token: "Bearer " + token
