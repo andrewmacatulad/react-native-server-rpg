@@ -18,7 +18,7 @@ module.exports = app => {
     passport.authenticate("google", {
       session: false,
       //successRedirect: "http://localhost:3000",
-      failureRedirect: "http://localhost:8081/login"
+      failureRedirect: "/auth/google"
     }),
     (req, res) => {
       const payload = req.user; // JWT Payload
@@ -33,7 +33,8 @@ module.exports = app => {
           res.cookie("test", `Bearer ${token}`, {
             maxAge: 2 * 60 * 60 * 60 * 1000
           });
-          res.redirect("/");
+          // res.redirect("/");
+          res.redirect("exp://10.0.75.1:19000/" + JSON.stringify(payload));
 
           // res.send({
           //   success: true,
