@@ -5,6 +5,7 @@ const passport = require("passport");
 // const validateRegisterInput = require("../../validation/register");
 // const validateLoginInput = require("../../validation/login");
 const User = require("../models/userModel");
+const Attributes = require("../models/attributeModel");
 
 // const User = require("../../models/User");
 const jwtSecret = require("../config/keys").secret;
@@ -33,6 +34,10 @@ module.exports = app => {
           email: req.body.email,
           password: pwd,
           name: req.body.name
+        });
+
+        const attributes = await Attributes.create({
+          userId: newUser.dataValues.id
         });
 
         res.json(userCreate);
