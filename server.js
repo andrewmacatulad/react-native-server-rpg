@@ -9,6 +9,7 @@ const sequelize = require("./database/sequelizeDatabase");
 
 const User = require("./models/userModel");
 const Attribute = require("./models/attributeModel");
+const Quest = require("./models/questModel");
 const Profile = require("./models/profileModel");
 
 const port = process.env.PORT || 5000;
@@ -25,6 +26,11 @@ sequelize
 
 Attribute.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 Profile.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+// Quest.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+Quest.belongsTo(User, {
+  as: "User",
+  foreignKey: "userId"
+});
 
 server.use(cors({ origin: "http://localhost:3000", credentials: true }));
 
@@ -43,6 +49,7 @@ require("./routes/authRoutes")(server);
 require("./routes/jwtAuthRoutes")(server);
 require("./routes/attributesRoutes")(server);
 require("./routes/profileRoutes")(server);
+require("./routes/questRoutes")(server);
 
 server.get("/", (req, res) => {
   res.send("<h1>Home</h1>");

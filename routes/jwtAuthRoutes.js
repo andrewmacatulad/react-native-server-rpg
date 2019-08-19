@@ -15,7 +15,7 @@ module.exports = app => {
   });
 
   app.post("/register", async (req, res, done) => {
-    console.log("Body ", req.body);
+    //console.log("Body ", req.body);
     try {
       const result = await User.findOne({ where: { email: req.body.email } });
       // console.log(result);
@@ -178,7 +178,7 @@ module.exports = app => {
     "/protected_page",
     passport.authenticate("jwt", { session: false }),
     (req, res) => {
-      console.log("User ", req.user.dataValues);
+      //console.log("User ", req.user.dataValues);
       res.send("Protected Route from Server");
     }
   );

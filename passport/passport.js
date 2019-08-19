@@ -239,6 +239,6 @@ passport.use(
     } catch (err) {
       return done(err, false);
     }
-    console.log(user.dataValues);
+    // console.log(user.dataValues);
   })
 );
