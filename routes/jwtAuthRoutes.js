@@ -37,8 +37,10 @@ module.exports = app => {
         });
 
         const attributes = await Attributes.create({
-          userId: newUser.dataValues.id
+          userId: userCreate.dataValues.id
         });
+
+        console.log("Attr ", userCreate.dataValues.id);
 
         res.json(userCreate);
       } catch (err) {
