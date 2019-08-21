@@ -28,6 +28,7 @@ module.exports = app => {
     }
   );
 
+  // test
   app.get(
     "/profile",
     passport.authenticate("jwt", { session: false }),
