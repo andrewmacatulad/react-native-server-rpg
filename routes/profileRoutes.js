@@ -1,6 +1,7 @@
 const passport = require("passport");
 const moment = require("moment");
 const Profile = require("../models/profileModel");
+const User = require("../models/userModel");
 
 module.exports = app => {
   app.post(
@@ -71,4 +72,23 @@ module.exports = app => {
       }
     }
   );
+
+  app.get("/sample_profile", async (req, res) => {
+    try {
+      const test = await Profile.findAll({
+        include: [
+          {
+            model: User,
+            required: true // do an INNER Join
+          }
+        ],
+        where: {
+          userId: 1
+        }
+      });
+      res.send(test);
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };

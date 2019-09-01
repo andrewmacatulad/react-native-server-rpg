@@ -33,6 +33,9 @@ Quest.belongsTo(User, {
 });
 
 server.use(cors({ origin: "http://localhost:3000", credentials: true }));
+// server.use(
+//   cors({ origin: "https://social-rpg-123.s3.amazonaws.com", credentials: true })
+// );
 
 // server.use(cors());
 // server.use(cookieParser())
@@ -50,6 +53,7 @@ require("./routes/jwtAuthRoutes")(server);
 require("./routes/attributesRoutes")(server);
 require("./routes/profileRoutes")(server);
 require("./routes/questRoutes")(server);
+require("./routes/albumRoutes")(server);
 
 server.get("/", (req, res) => {
   res.send("<h1>Home</h1>");

@@ -172,6 +172,18 @@ module.exports = app => {
       } = req.body;
 
       try {
+        // const userUpdate = await Attributes.update(
+        //   {
+        //     strength,
+        //     vitality,
+        //     intelligence,
+        //     spirit,
+        //     luck,
+        //     statPointsRemaining
+        //   },
+        //   { where: { userId: req.user.dataValues.id } }
+        // );
+        // res.json(userUpdate);
         const userUpdate = await Attributes.update(
           {
             strength,
@@ -184,7 +196,13 @@ module.exports = app => {
           { where: { userId: req.user.dataValues.id } }
         );
 
-        res.json(useUpdate);
+        if (userUpdate[0] === 1) {
+          const getUpdate = await Attributes.findOne({
+            where: { userId: req.user.id }
+          });
+
+          return res.json(getUpdate);
+        }
       } catch (err) {
         console.log(err);
       }

@@ -16,23 +16,23 @@ const opts = {
 //   }
 // });
 
-// const sequelize = new Sequelize("social-app", "postgres", "postgres", {
-//   dialect: "postgres",
-//   host: "localhost",
-//   define: {
-//     freezeTableName: true,
-//     timestamps: false
-//   }
-// });
-
-const sequelize = new Sequelize(process.env.DATABASE_URL, {
+const sequelize = new Sequelize("social-app", "postgres", "postgres", {
   dialect: "postgres",
-  protocol: "postgres",
-  host: "https://mighty-bayou-22851.herokuapp.com",
+  host: "localhost",
   define: {
     freezeTableName: true,
     timestamps: false
   }
 });
+
+// const sequelize = new Sequelize(process.env.DATABASE_URL, {
+//   dialect: "postgres",
+//   protocol: "postgres",
+//   host: "https://mighty-bayou-22851.herokuapp.com",
+//   define: {
+//     freezeTableName: true,
+//     timestamps: false
+//   }
+// });
 
 module.exports = sequelize;
