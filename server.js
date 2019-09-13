@@ -11,6 +11,7 @@ const User = require("./models/userModel");
 const Attribute = require("./models/attributeModel");
 const Quest = require("./models/questModel");
 const Profile = require("./models/profileModel");
+const Pet = require("./models/petModel");
 
 const port = process.env.PORT || 5000;
 
@@ -26,6 +27,7 @@ sequelize
 
 Attribute.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 Profile.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+Pet.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 // Quest.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 Quest.belongsTo(User, {
   as: "User",
@@ -51,6 +53,7 @@ require("./passport/passport");
 require("./routes/authRoutes")(server);
 require("./routes/jwtAuthRoutes")(server);
 require("./routes/attributesRoutes")(server);
+require("./routes/petRoutes")(server);
 require("./routes/profileRoutes")(server);
 require("./routes/questRoutes")(server);
 require("./routes/albumRoutes")(server);

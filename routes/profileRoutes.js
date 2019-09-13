@@ -50,9 +50,20 @@ module.exports = app => {
     "/profile",
     passport.authenticate("jwt", { session: false }),
     async (req, res) => {
-      const { name, gender, address, birthday } = req.body;
+      const { name, gender, address, birthday, imageUrl } = req.body;
 
       const ageNow = moment().diff(birthday, "years");
+
+      try {
+        const userPicUpdate = await User.update(
+          {
+            profile_pic_url: imageUrl
+          },
+          { where: { id: req.user.dataValues.id } }
+        );
+      } catch (err) {
+        console.log(err);
+      }
 
       try {
         const userUpdate = await Profile.update(
