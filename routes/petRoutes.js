@@ -1,7 +1,6 @@
 const passport = require("passport");
 const moment = require("moment");
-const Pet = require("../models/petModel");
-const User = require("../models/userModel");
+const Pet = require("../models/petProfileModel");
 
 module.exports = app => {
   app.post(
@@ -122,7 +121,7 @@ module.exports = app => {
       console.log("Params ", petId);
       try {
         const pet = await Pet.findOne({
-          where: { userId: req.user.id, id: petId }
+          where: { id: petId }
         });
         console.log("pets ", pet.dataValues);
         res.send(pet.dataValues);
@@ -158,4 +157,39 @@ module.exports = app => {
       }
     }
   );
+
+  const expLevel = require("../experience");
+  app.get("/experience", async (req, res) => {
+    // let exp = 50;
+    // let level = 1;
+    // let expArr = [];
+    // let levelArr = [];
+    // for (let i = 1; i <= 100; i++) {
+    //   // const expLevel = await Level.find({ level: i });
+
+    //   exp = exp * 1.2;
+    //   expArr.push(Math.trunc(exp));
+    //   level = i;
+    //   levelArr.push(level);
+    // }
+    res.json(expLevel);
+  });
+
+  app.delete("/pet_delete/:petId", async (req, res) => {
+    const { petId } = req.params;
+
+    try {
+      // sample.name = name;
+      // sample.address = address;
+      // // res.send("Updated ", sample);
+      // return await sample.save();
+      const sample = await Pet.destroy({ where: { id: petId } });
+      return res.status(201).json({
+        error: false,
+        message: "Pet has been deleted"
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  });
 };

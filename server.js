@@ -11,7 +11,8 @@ const User = require("./models/userModel");
 const Attribute = require("./models/attributeModel");
 const Quest = require("./models/questModel");
 const Profile = require("./models/profileModel");
-const Pet = require("./models/petModel");
+const Pet = require("./models/petProfileModel");
+const PetChar = require("./models/petCharacterModel");
 
 const port = process.env.PORT || 5000;
 
@@ -29,6 +30,7 @@ Attribute.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 Profile.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 Pet.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
 // Quest.belongsTo(User, { constraints: true, onDelete: "CASCADE" });
+PetChar.belongsTo(Pet, { constraints: true, onDelete: "CASCADE" });
 Quest.belongsTo(User, {
   as: "User",
   foreignKey: "userId"
@@ -54,6 +56,7 @@ require("./routes/authRoutes")(server);
 require("./routes/jwtAuthRoutes")(server);
 require("./routes/attributesRoutes")(server);
 require("./routes/petRoutes")(server);
+require("./routes/petExpRoutes")(server);
 require("./routes/profileRoutes")(server);
 require("./routes/questRoutes")(server);
 require("./routes/albumRoutes")(server);

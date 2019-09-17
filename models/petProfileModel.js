@@ -2,7 +2,7 @@ const Sequelize = require("sequelize");
 
 const sequelize = require("../database/sequelizeDatabase");
 
-const Profile = sequelize.define("pets", {
+const Pet = sequelize.define("pets", {
   id: {
     allowNull: false,
     primaryKey: true,
@@ -18,4 +18,4 @@ const Profile = sequelize.define("pets", {
   petStatus: Sequelize.STRING
 });
 
-module.exports = Profile;
+module.exports = Pet;
