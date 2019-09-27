@@ -175,21 +175,25 @@ module.exports = app => {
     res.json(expLevel);
   });
 
-  app.delete("/pet_delete/:petId", async (req, res) => {
-    const { petId } = req.params;
+  app.delete(
+    "/pet_delete/:petId",
+    passport.authenticate("jwt", { session: false }),
+    async (req, res) => {
+      const { petId } = req.params;
 
-    try {
-      // sample.name = name;
-      // sample.address = address;
-      // // res.send("Updated ", sample);
-      // return await sample.save();
-      const sample = await Pet.destroy({ where: { id: petId } });
-      return res.status(201).json({
-        error: false,
-        message: "Pet has been deleted"
-      });
-    } catch (err) {
-      console.log(err);
+      try {
+        // sample.name = name;
+        // sample.address = address;
+        // // res.send("Updated ", sample);
+        // return await sample.save();
+        const sample = await Pet.destroy({ where: { id: petId } });
+        return res.status(201).json({
+          error: false,
+          message: "Pet has been deleted"
+        });
+      } catch (err) {
+        console.log(err);
+      }
     }
-  });
+  );
 };

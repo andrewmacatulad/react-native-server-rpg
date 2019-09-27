@@ -1,5 +1,6 @@
 const passport = require("passport");
 const Quest = require("../models/questModel");
+const User = require("../models/userModel");
 
 module.exports = app => {
   app.patch(
@@ -33,9 +34,25 @@ module.exports = app => {
       const { questId } = req.params;
       console.log("Params ", questId);
       try {
+        // const quest = await Quest.findOne({
+        //   where: { userId: req.user.id, id: questId }
+        // });
+
         const quest = await Quest.findOne({
-          where: { userId: req.user.id, id: questId }
+          where: { userId: req.user.id, id: questId },
+          include: [
+            {
+              model: User,
+              // as: ["UserQuest"]
+              as: "UserQuest",
+              through: {
+                // UserQuest: ["userId"],
+                where: { userId: 1 }
+              }
+            }
+          ]
         });
+
         console.log("quests ", quest.dataValues);
         res.send(quest.dataValues);
       } catch (error) {
@@ -65,6 +82,19 @@ module.exports = app => {
   app.get("/quests", async (req, res) => {
     try {
       const quests = await Quest.findAll();
+      // const quests = await Quest.findAll({
+      //   include: [
+      //     {
+      //       model: User,
+      //       // as: ["UserQuest"]
+      //       as: "UserQuest"
+      //       // through: {
+      //       //   // attributes: ["createdAt", "startedAt", "finishedAt"],
+      //       //   where: { id: userId }
+      //       // }
+      //     }
+      //   ]
+      // });
       // console.log("quests ", quests);
       res.json(quests);
     } catch (error) {

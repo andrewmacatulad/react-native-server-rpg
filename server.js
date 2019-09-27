@@ -13,6 +13,8 @@ const Quest = require("./models/questModel");
 const Profile = require("./models/profileModel");
 const Pet = require("./models/petProfileModel");
 const PetChar = require("./models/petCharacterModel");
+const Sample = require("./models/sampleModel");
+const PetLike = require("./models/petLikesModel");
 
 const port = process.env.PORT || 5000;
 
